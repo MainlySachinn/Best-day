@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Nikki 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+body{
+  margin:0;
+  height:100vh;
+  background: radial-gradient(circle at top, #ffb3d9, #c77dff, #ffd6a5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:'Great Vibes', cursive;
+}
+
+/* EMOJI RAIN */
+#emoji-rain{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
+}
+
+.emoji{
+  position:absolute;
+  top:-40px;
+  animation: fall linear infinite;
+  opacity:0.9;
+}
+
+@keyframes fall{
+  to{ transform: translateY(110vh); }
+}
+
+/* CONTENT */
+.wrapper{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+
+.open-text{
+  margin-bottom:14px;
+  font-size:22px;
+  color:#fff;
+  text-shadow:0 0 12px hotpink;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.6}
+  50%{opacity:1}
+}
+
+/* ENVELOPE */
+.envelope{
+  width:340px;
+  height:220px;
+  background:#ffb6d9;
+  border-radius:14px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 0 25px hotpink;
+  overflow:hidden;
+}
+
+.flap{
+  position:absolute;
+  inset:0;
+  background:#ff7eb9;
+  clip-path:polygon(0 0,50% 55%,100% 0);
+  transform-origin:top;
+  transition:.8s;
+  z-index:3;
+}
+
+.letter{
+  position:absolute;
+  bottom:-100%;
+  left:5%;
+  width:90%;
+  height:90%;
+  background:#fff0f7;
+  border-radius:10px;
+  box-shadow:0 0 15px pink;
+  transition:1s;
+  visibility:hidden;
+  z-index:2;
+}
+
+.letter-content{
+  padding:15px;
+  height:100%;
+  overflow-y:auto;
+  font-size:18px;
+  color:#c4006f;
+}
+
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+  bottom:5%;
+  visibility:visible;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO (LOCAL FILE REQUIRED) -->
+<audio id="loveSong" loop>
+  <source src="TumHo.mp3" type="audio/mpeg">
+</audio>
+
+<!-- EMOJI RAIN -->
+<div id="emoji-rain"></div>
+
+<div class="wrapper">
+
+  <div class="open-text">
+    please open the envelope myyy cutuuuu lillllllllll chocoooooooooo 🥹❤️
+  </div>
+
+  <div class="envelope" onclick="openEnvelope()">
+    <div class="flap"></div>
+
+    <div class="letter">
+      <div class="letter-content">
+        helloo myyyy cutuuuuu lillll chocooooooooooooooo😚❤️🧿❤️,<br><br>
+
+        Happy valentine day my wifeyyy ,<br>
+        I love you love you love you love you love you love you love you love you love you love you love you love you soooooooooo muchhhhhhhhhh<br>
+        myyyyyy cutuuuuuuu lillllllll chocooooooooo ❤️🧿😚😚😘😚🥰❤️😚🧿,<br><br>
+
+        baby please mujhe maaf kr dena abhi tk jo maine aapko hurt kra hai im sorry baccha ,<br>
+        kasam se baby tumhe khona nahi chata hu mai isley pagal ho jata hu kiya kru mai yrr<br>
+        pyaar krta hu mai tumhe i love you so much baccha
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let rainStarted = false;
+
+function openEnvelope(){
+  const env = document.querySelector(".envelope");
+  env.classList.add("open");
+
+  document.querySelector(".open-text").style.display="none";
+
+  // PLAY SONG (user interaction = allowed)
+  const song = document.getElementById("loveSong");
+  song.volume = 0.8;
+  song.play();
+
+  // START EMOJI RAIN ONLY ON CLICK
+  if(!rainStarted){
+    rainStarted = true;
+    startEmojiRain();
+  }
+}
+
+function startEmojiRain(){
+  const emojis = ["💗","💖","💕","💘","💞","❤️","✨","⭐","🌸"];
+  const container = document.getElementById("emoji-rain");
+
+  for(let i=0;i<420;i++){
+    const e = document.createElement("span");
+    e.className="emoji";
+    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = Math.random()*100 + "vw";
+    e.style.fontSize = (14 + Math.random()*24) + "px";
+    e.style.animationDuration = (4 + Math.random()*6) + "s";
+    e.style.animationDelay = Math.random()*5 + "s";
+    container.appendChild(e);
+  }
+}
+</script>
+
+</body>
+</html>
